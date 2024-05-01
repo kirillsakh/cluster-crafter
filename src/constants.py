@@ -1,0 +1,2 @@
+CONFIG_YAML_NAME = 'config.yaml'
+DEFAULT_OUTPUT_FILE_NAME = 'labels'

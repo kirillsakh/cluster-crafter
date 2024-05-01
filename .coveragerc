@@ -1,0 +1,3 @@
+skip_empty = true
+[run]
+omit = __init__.py, cluster_crafter/constants.py, cluster_crafter/options.py, cluster_crafter/types.py

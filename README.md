@@ -24,14 +24,23 @@ source .venv/bin/activate
 
 ```
 # Upgrade pip
-pip install --upgrade pip
+$ pip install --upgrade pip
 
 # Install pip-tools
-pip install pip-tools
+$ pip install pip-tools
 
 # Generate requirements.txt
-pip-compile requirements.in
+$ pip-compile requirements.in
 
 # Install dependencies
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
+###  Setup pre-commit
+
+```
+# Install the git hook scripts
+$ pre-commit install
+pre-commit installed at .git/hooks/pre-commit
+```
+
+<ul><li>now <code>pre-commit</code> will run automatically on <code>git commit</code>!</li></ul>

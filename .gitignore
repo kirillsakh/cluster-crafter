@@ -1,0 +1,14 @@
+# Virtualenvs
+.venv
+venv/
+
+# IDE
+.idea
+.vscode
+
+# Testing
+.pytest_cache/
+__pycache__/
+
+# Ruff
+.ruff_cache

@@ -3,6 +3,7 @@ dependency-injector==4.41.0
 mypy==1.10.0
 numpy==1.26.4
 pre-commit==3.7.0
+pytest==8.2.0
 pyyaml==6.0.1
 ruff==0.4.2
 scikit-learn==1.4.2

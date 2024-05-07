@@ -16,6 +16,8 @@ filelock==3.14.0
     # via virtualenv
 identify==2.5.36
     # via pre-commit
+iniconfig==2.0.0
+    # via pytest
 joblib==1.4.2
     # via scikit-learn
 mypy==1.10.0
@@ -29,9 +31,15 @@ numpy==1.26.4
     #   -r requirements.in
     #   scikit-learn
     #   scipy
+packaging==24.0
+    # via pytest
 platformdirs==4.2.1
     # via virtualenv
+pluggy==1.5.0
+    # via pytest
 pre-commit==3.7.0
+    # via -r requirements.in
+pytest==8.2.0
     # via -r requirements.in
 pyyaml==6.0.1
     # via

@@ -6,14 +6,8 @@ from typing import Generator
 import numpy as np
 import pytest
 
-from src.file_handlers.base_handler import FileFormatHandler
 from src.file_handlers.json_handler import JsonHandler
 from src.file_handlers.numpy_handler import NumpyHandler
-
-
-@pytest.fixture
-def base_handler() -> FileFormatHandler:
-    return FileFormatHandler()
 
 
 @pytest.fixture
@@ -26,30 +20,23 @@ def numpy_handler() -> NumpyHandler:
     return NumpyHandler()
 
 
-def ndarray(num_samples: int, num_of_dimensions: int) -> np.ndarray:
-    """Fixture to generate N-dimensional arrays."""
-    feature_vector_sizes = np.random.randint(1, 6, size=num_of_dimensions - 1)
-    shape = (num_samples,) + tuple(feature_vector_sizes)
-    return np.random.randn(*shape)
+@pytest.fixture
+def test_array() -> np.ndarray:
+    return np.random.normal(size=(300, 5))
 
 
 @pytest.fixture
-def array_4_d() -> np.ndarray:
-    return ndarray(num_samples=300, num_of_dimensions=4)
-
-
-@pytest.fixture
-def json_file_path(array_4_d: np.ndarray, tmpdir: Path) -> Generator[str, None, None]:
+def json_file_path(test_array: np.ndarray, tmpdir: Path) -> Generator[str, None, None]:
     file_path = str(tmpdir / "test_data.json")
     with open(file_path, "w") as f:
-        json.dump(array_4_d.tolist(), f)
+        json.dump(test_array.tolist(), f)
     yield file_path
     os.remove(file_path)
 
 
 @pytest.fixture
-def numpy_file_path(array_4_d: np.ndarray, tmpdir: Path) -> Generator[str, None, None]:
+def numpy_file_path(test_array: np.ndarray, tmpdir: Path) -> Generator[str, None, None]:
     file_path = str(tmpdir / "test_data.npy")
-    np.save(file_path, array_4_d)
+    np.save(file_path, test_array)
     yield file_path
     os.remove(file_path)

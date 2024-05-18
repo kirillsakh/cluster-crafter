@@ -1,7 +1,5 @@
 import numpy as np
-from sklearn.cluster import KMeans as _Kmeans  # type: ignore
-
-from src.utils import reshape_to_2d
+from sklearn.cluster import KMeans as _Kmeans
 
 from .base_clustering import BaseClustering
 
@@ -9,40 +7,23 @@ from .base_clustering import BaseClustering
 class KMeans(BaseClustering):
     """KMeans clustering algorithm implementation."""
 
-    def __init__(self, kwargs: dict):
+    def __init__(self, n_clusters: int):
         """
-        Initialize KMeans clustering algorithm.
+        Initialize the KMeans clustering algorithm.
 
         Args:
-            kwargs (dict): Keyword arguments to initialize KMeans.
-
+            n_clusters (int): The number of clusters to form as well as the number of centroids to generate.
         """
-        self.algorithm: _Kmeans = _Kmeans(**kwargs)
-
-    @classmethod
-    def create(cls, kwargs: dict) -> "KMeans":
-        """
-        Create an instance of KMeans clustering algorithm.
-
-        Args:
-            kwargs (dict): Keyword arguments to initialize KMeans.
-
-        Returns:
-            KMeans: An instance of KMeans clustering algorithm.
-
-        """
-        return cls(kwargs)
+        self.algorithm = _Kmeans(n_clusters=n_clusters)
 
     def process(self, data: np.ndarray) -> np.ndarray:
         """
-        Process data using KMeans clustering algorithm.
+        Process the input data using KMeans clustering algorithm.
 
         Args:
-            data (np.ndarray): Input data to be processed.
+            data (np.ndarray): Input data to be clustered.
 
         Returns:
-            np.ndarray: Cluster labels for each data point.
-
+            np.ndarray: Array of cluster labels assigned to each data point.
         """
-        data_flat = reshape_to_2d(data)
-        return self.algorithm.fit_predict(data_flat)
+        return self.algorithm.fit_predict(data)

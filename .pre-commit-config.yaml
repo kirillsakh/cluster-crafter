@@ -6,6 +6,9 @@ repos:
         args: [--ignore-missing-imports, --explicit-package-bases]
         language: python
         minimum_pre_commit_version: '3.7.0'
+        additional_dependencies: [
+          types-PyYAML
+        ]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.4.2

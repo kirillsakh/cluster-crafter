@@ -1,19 +1,18 @@
+from unittest.mock import MagicMock
+
 import numpy as np
+from sklearn.cluster import DBSCAN as _DBSCAN
 
 from src.algorithms.dbscan import DBSCAN
 
-from .data import KWARGS_DBSCAN
-
 
 class TestDBSCAN:
-    def test_create(self):
-        dbscan = DBSCAN.create(KWARGS_DBSCAN)
-        assert isinstance(dbscan, DBSCAN)
-        params = dbscan.algorithm.get_params()
-        for key, value in KWARGS_DBSCAN.items():
-            assert params[key] == value
+    def test_create(self, dbscan_instance: DBSCAN):
+        assert isinstance(dbscan_instance, DBSCAN)
+        assert isinstance(dbscan_instance.algorithm, _DBSCAN)
 
-    def test_process(self, mock_dbscan: DBSCAN):
-        data = np.array([[1, 2], [3, 4]])
-        mock_dbscan.process(data)
-        assert mock_dbscan.algorithm.fit_predict.called_once_with(data)
+    def test_process(self, dbscan_instance: DBSCAN, test_array: np.ndarray):
+        dbscan_instance.algorithm = MagicMock()
+        _ = dbscan_instance.process(test_array)
+
+        dbscan_instance.algorithm.fit_predict.assert_called_once_with(test_array)

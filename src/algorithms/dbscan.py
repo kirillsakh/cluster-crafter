@@ -1,53 +1,31 @@
 import numpy as np
-from sklearn.cluster import DBSCAN as _DBSCAN  # type: ignore
-
-from src.utils import reshape_to_2d
+from sklearn.cluster import DBSCAN as _DBSCAN
 
 from .base_clustering import BaseClustering
 
 
 class DBSCAN(BaseClustering):
-    """DBSCAN clustering algorithm implementation.
+    """DBSCAN clustering algorithm implementation."""
 
-    Args:
-        kwargs (dict): Keyword arguments to initialize the DBSCAN algorithm.
-
-    Attributes:
-        algorithm (_DBSCAN): Instance of the DBSCAN algorithm.
-
-    """
-
-    def __init__(self, kwargs: dict):
-        """Initialize the DBSCAN clustering algorithm.
+    def __init__(self, eps: float, min_samples: int):
+        """
+        Initialize the DBSCAN clustering algorithm.
 
         Args:
-            kwargs (dict): Keyword arguments to initialize the DBSCAN algorithm.
-
+            eps (float): The maximum distance between two samples for one to be considered
+                as in the neighborhood of the other.
+            min_samples (int): The number of samples (or total weight) in a neighborhood for
+                a point to be considered as a core point.
         """
-        self.algorithm: _DBSCAN = _DBSCAN(**kwargs)
-
-    @classmethod
-    def create(cls, kwargs: dict) -> "DBSCAN":
-        """Create a new instance of the DBSCAN class.
-
-        Args:
-            kwargs (dict): Keyword arguments to initialize the DBSCAN algorithm.
-
-        Returns:
-            DBSCAN: An instance of the DBSCAN class.
-
-        """
-        return cls(kwargs)
+        self.algorithm = _DBSCAN(eps=eps, min_samples=min_samples)
 
     def process(self, data: np.ndarray) -> np.ndarray:
-        """Process the input data using the DBSCAN algorithm.
+        """Process the input data using DBSCAN clustering algorithm.
 
         Args:
             data (np.ndarray): Input data to be clustered.
 
         Returns:
             np.ndarray: Array of cluster labels assigned to each data point.
-
         """
-        data_flat = reshape_to_2d(data)
-        return self.algorithm.fit_predict(data_flat)
+        return self.algorithm.fit_predict(data)

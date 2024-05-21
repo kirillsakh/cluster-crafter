@@ -21,11 +21,6 @@ def numpy_handler() -> NumpyHandler:
 
 
 @pytest.fixture
-def test_array() -> np.ndarray:
-    return np.random.normal(size=(300, 5))
-
-
-@pytest.fixture
 def json_file_path(test_array: np.ndarray, tmpdir: Path) -> Generator[str, None, None]:
     file_path = str(tmpdir / "test_data.json")
     with open(file_path, "w") as f:

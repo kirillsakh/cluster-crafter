@@ -1,35 +1,21 @@
 import numpy as np
-from sklearn.cluster import SpectralClustering as _SpectralClustering  # type: ignore
-
-from src.utils import reshape_to_2d
+from sklearn.cluster import SpectralClustering as _SpectralClustering
 
 from .base_clustering import BaseClustering
 
 
 class SpectralClustering(BaseClustering):
-    """Spectral clustering algorithm implementation."""
+    """SpectralClustering clustering algorithm implementation."""
 
-    def __init__(self, kwargs: dict):
+    def __init__(self, n_clusters: int, affinity: str):
         """
-        Initialize SpectralClustering instance.
+        Initialize the SpectralClustering clustering algorithm.
 
         Args:
-            kwargs (dict): Keyword arguments to configure the SpectralClustering algorithm.
+            n_clusters (int): The number of clusters to form as well as the number of centroids to generate.
+            affinity (str): The affinity type to use. This can be 'nearest_neighbors', 'rbf', etc.
         """
-        self.algorithm: _SpectralClustering = _SpectralClustering(**kwargs)
-
-    @classmethod
-    def create(cls, kwargs: dict) -> "SpectralClustering":
-        """
-        Create a new instance of SpectralClustering.
-
-        Args:
-            kwargs (dict): Keyword arguments to configure the SpectralClustering algorithm.
-
-        Returns:
-            SpectralClustering: A new instance of SpectralClustering.
-        """
-        return cls(kwargs)
+        self.algorithm = _SpectralClustering(n_clusters=n_clusters, affinity=affinity)
 
     def process(self, data: np.ndarray) -> np.ndarray:
         """
@@ -41,5 +27,4 @@ class SpectralClustering(BaseClustering):
         Returns:
             numpy.ndarray: The processed data.
         """
-        data_flat = reshape_to_2d(data)
-        return self.algorithm.fit_predict(data_flat)
+        return self.algorithm.fit_predict(data)

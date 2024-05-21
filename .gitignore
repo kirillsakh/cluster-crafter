@@ -9,6 +9,7 @@ venv/
 # Testing
 .pytest_cache/
 __pycache__/
+.coverage
 
 # Ruff
 .ruff_cache

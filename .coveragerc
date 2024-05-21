@@ -1,0 +1,4 @@
+[coverage:report]
+skip_empty = true
+[run]
+omit = src/algorithms/base_clustering.py, src/file_handlers/base_handler.py

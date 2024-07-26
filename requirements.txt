@@ -55,6 +55,8 @@ six==1.16.0
     # via dependency-injector
 threadpoolctl==3.5.0
     # via scikit-learn
+types-pyyaml==6.0.12.20240311
+    # via -r requirements.in
 typing-extensions==4.11.0
     # via mypy
 virtualenv==20.26.1

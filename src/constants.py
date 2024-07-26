@@ -1,1 +1,3 @@
 CONFIG_YAML_NAME = "config.yaml"
+DEFAULT_FORMAT_TYPE = "json"
+DEFAULT_OUTPUT_FILE_NAME = "labels"
